@@ -1,0 +1,98 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+int data;
+struct node *next;
+};
+struct node *newnode(int data)
+{
+	struct node *temp=(struct node*)malloc(sizeof(struct node));
+	temp->data=data;
+	temp->next=NULL;
+	return temp;
+}
+void print(struct node *head)
+{
+	struct node *temp=NULL;
+	temp=head;
+	while(temp!=NULL)
+	{
+		printf("%d->",temp->data);
+		temp=temp->next;
+		
+	}
+	printf("\n");
+	
+}
+int main()
+{
+	struct node *head1=NULL;
+		struct node *head2=NULL;
+			struct node *head3=NULL;
+
+
+	head1=newnode(1);
+	head1->next=newnode(3);
+		head1->next->next=newnode(5);
+			head1->next->next->next=newnode(7);
+			print(head1);// first linked list is 1->3->5->7
+ head2=newnode(2);
+	head2->next=newnode(4);
+		head2->next->next=newnode(6);
+			head2->next->next->next=newnode(8); //second linked list is 2->4->6->8
+			print(head2);
+			
+			
+			
+			struct node *a=head1;
+			struct node *b=head2;
+			struct node *c=head3;
+			while(a&&b)
+			{
+				if(a->data<=b->data)
+				{
+					if(head3==NULL)
+					{
+						head3=newnode(a->data);
+						c=head3;
+					}
+					else{
+						c->next=newnode(a->data);
+						c=c->next;
+					}
+					a=a->next;
+				}
+				else{
+						if(head3==NULL)
+					{
+						head3=newnode(b->data);
+						c=head3;
+					}
+						else{
+						c->next=newnode(b->data);
+						c=c->next;
+					}
+					b=b->next;
+					
+				}
+				
+				
+				
+				
+				
+			}
+			while(a) //if  some element is left in linked list 1 
+			{
+				c->next=newnode(a->data);
+				a=a->next;
+				c=c->next;
+			}
+				while(b) //if  some element is left in linked list 1 
+			{
+				c->next=newnode(b->data);
+				b=b->next;
+				c=c->next;
+			}
+			print(head3);
+return 0;
+}
